@@ -1,0 +1,64 @@
+﻿@using DataConnect.Business;
+@model Channels_AccountViewModel
+
+@{ ViewData["Title"] = "Index";
+    if (Model.Account.Role == Roles.Moderator)
+    {
+        Layout = "ModLayout";
+    }
+    else if (Model.Account.Role == Roles.User)
+    {
+        Layout = "UserLayout";
+    } 
+}
+
+
+<p>
+    @if (Model.Account.Role == Roles.Administrator)
+    {
+        <a asp-controller="Account" asp-action="AllAccounts">All Users</a>
+    }
+</p>
+<p>
+    @if (Model.Account.Role == Roles.Moderator)
+    {
+        <a asp-action="AddChannel">Create channel</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Channels[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Channels[0].Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var channel in Model.Channels)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => channel.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => channel.Description)
+                </td>
+                <td>
+                    @if (Model.Account.Role == Roles.Moderator)
+                    {
+                        <a class="btn btn-primary" asp-action="EditChannel" asp-route-id="@channel.Id">Edit</a>
+                        <a class="btn btn-primary" asp-controller="Channel" asp-action="RemoveChannel" asp-route-id="@channel.Id">Remove</a>
+                    }
+                    @if (Model.Account.Role == Roles.User)
+                    {
+                        <a class="btn btn-primary" id="enterButton" href="@Url.Action("Index","Chat", new { ChannelId = channel.Id})">Join</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

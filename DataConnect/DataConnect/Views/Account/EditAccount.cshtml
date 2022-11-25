@@ -1,0 +1,38 @@
+﻿@model DataConnect.Models.AccountViewModel
+
+@{
+    ViewData["Title"] = "EditAccount";
+    Layout = "AdminLayout";
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditAccount">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="AccountID" class="form-control" type="hidden" value="@Model.AccountID" readonly="readonly" />
+                <span asp-validation-for="AccountID" class="text-danger"></span>
+            </div>            
+            <label>Current role: @Model.Role</label>
+            <div class="input-group mb-3">
+                <select asp-for="Role" class="form-select" id="inputGroupSelect01">
+                    <option value="0">User</option>
+                    <option value="1">Moderator</option>
+                    <option value="2">Administrator</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AllAccounts">Back to Users</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,47 @@
+﻿@using DataConnect.Controllers
+@model ChannelDTO
+
+@{ 
+    Layout = "UserLayout";
+}
+
+<script type="text/javascript">
+
+   var specialName = '@Model.UserName';
+    
+</script>
+
+
+<div class="container">
+    <div class="scroll-bg">
+        <div class="scroll-div">
+            <div>
+                <ul id="typingList"></ul>
+            </div>
+            <div>
+                <ul class="chat" id="messagesList"></ul>
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-6">
+                Message<input type="text" maxlength="100" id="messageInput" required >
+                <input type="button" class="btn btn-primary" id="groupSendButton" value="Send Message" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <input type="hidden" id="userInput" value="@Model.UserName" />
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <input type="hidden" id="ChannelName" value="@ViewBag.channelname.Name" />
+        </div>
+    </div>
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>

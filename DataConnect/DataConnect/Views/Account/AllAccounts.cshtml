@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DataConnect.Models.AccountViewModel>
+
+@{
+    ViewData["Title"] = "All Accounts";
+    Layout = "AdminLayout";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Displayname
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Firstname
+            </th>
+            <th>
+                Lastname
+            </th>
+            <th>
+                Role 
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.AccountID)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="EditAccount" asp-route-id="@item.AccountID">Edit</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
